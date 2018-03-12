@@ -16,18 +16,10 @@ class PostsController extends Controller
     {
 
         $posts = Post::latest()
-        ->filter(request(['month', 'year']))
+        ->filter(request()->only(['month', 'year']))
         ->get();
 
-        // Temporary.
-
-        $archive = Post::selectRaw('year(created_at) year, monthname(created_at) month, count(*) published')
-        ->groupBy('year','month')
-        ->orderByRaw('min(created_at) desc')
-        ->get()
-        ->toArray();
-
-        return view('posts.index', compact('posts', 'archive'));
+        return view('posts.index', compact('posts'));
     
     }
 
