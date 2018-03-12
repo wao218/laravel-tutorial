@@ -6,18 +6,23 @@ use Illuminate\Http\Request;
 
 use App\Post;
 
+use App\Repositories\Posts;
+
 class PostsController extends Controller
 {
     public function __construct() {
         $this->middleware('auth')->except(['index', 'show']); // must be signed in to create a post
     }
     
-    public function index() 
+    public function index(Posts $posts) 
     {
 
-        $posts = Post::latest()
-        ->filter(request()->only(['month', 'year']))
-        ->get();
+        $posts = $posts->all();
+
+
+        // $posts = Post::latest()
+        // ->filter(request()->only(['month', 'year']))
+        // ->get();
 
         return view('posts.index', compact('posts'));
     
