@@ -12,11 +12,7 @@
 */
 
 
-App::bind('App\Billing\Stripe', function () {
-
-    return new \App\Billing\Stripe(config('services.stripe.secret'));
-
-});
+//dd(resolve('App\Billing\Stripe'));
 
 
 
