@@ -16,7 +16,7 @@ class PostsController extends Controller
     
     public function index(Posts $posts) 
     {
-
+        
         $posts = $posts->all();
 
 
@@ -78,6 +78,8 @@ class PostsController extends Controller
             new Post(request(['title', 'body']))
         
         );
+
+        session()->flash('message', 'Your post has now been published.');
 
         // Best practice
         // Post::create([
